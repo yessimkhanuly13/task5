@@ -1,17 +1,30 @@
 import { useState } from "react"
 import InfiniteScrollTable from "./components/InfiniteScrollTable";
 import { CSVLink } from "react-csv";
+import shuffle from './assets/shuffle.png'
 
 function App() {
 
   const [seed, setSeed] = useState(1);
   const [err, setErr] = useState(1);
   const [region, setRegion] = useState('');
-  const [dataCsv, setDataCsv] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [csvData, setCsvData] = useState([]);
 
   const getRandomNumber = () =>{
     const number = Math.floor(Math.random() *  10000000);
     setSeed(number);
+  }
+
+  const getCSV = () =>{
+    const csv = [];
+
+    users.forEach((user)=>{
+      const csv = [user.name.title + ' '+user.name.first + " " + user.name.last, user.location.country + ", " + user.location.city + ", " + user.location.street.number + " " + user.location.street.name, user.phone];
+      setCsvData((prev)=>[...prev, [csv]]);
+    })
+
+
   }
 
   return (
@@ -29,16 +42,16 @@ function App() {
           <label htmlFor="inputfield"></label>
           <input className="p-2" id="inputfield" onChange={(e)=>{setErr(e.target.value)}} type="range" min='0' max='10'/>
         </div>
-        <div>
+        <div className="inline-flex items-center">
           <label htmlFor="seed">Seed</label>
           <input className="text-center w-20 ml-2" id="seed" onChange={(e)=>{setSeed(e.target.value)}} type="number" value={seed}/>
-          <button onClick={getRandomNumber} className="border p-2">Random</button>
+          <button onClick={getRandomNumber} className="w-8 h-8"><img className="" src={shuffle} alt="shuffle" /></button>
         </div>
         <div className="mt-2">
-          <CSVLink data={dataCsv}>Export</CSVLink>
+          <CSVLink onClick={getCSV} data={csvData} filename={'list.csv'} headers={['Name', 'Location', 'Phone']}>Export</CSVLink>
         </div>
       </div>
-      <InfiniteScrollTable seed={seed} err={err} region={region} setDataCsv={setDataCsv}/>
+      <InfiniteScrollTable seed={seed} err={err} region={region} users={users} setUsers={setUsers}/>
     </>
   )
 }

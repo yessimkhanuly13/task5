@@ -2,12 +2,12 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-function InfiniteScrollTable({seed, err, region, setDataCsv}) {
-    const [users, setUsers] = useState([]);
+function InfiniteScrollTable({seed, err, region, setDataCsv, users, setUsers}) {
+    
     const [page, setPage] = useState(1);
 
     const fetchMoreUsers = () =>{
-        axios.get(`https://randomuser.me/api?nat=${region}&results=10&page=${page + 1}`)
+        axios.get(`https://randomuser.me/api?inc=name,nat,login,location,phone&nat=${region}&results=10&page=${page + 1}`)
             .then((res)=>{
                 setUsers((prevUsers)=>[...prevUsers, ...res.data.results]);
                 setPage(page+1);
@@ -18,7 +18,7 @@ function InfiniteScrollTable({seed, err, region, setDataCsv}) {
     }
     
     useEffect(()=>{
-        axios.get(`https://randomuser.me/api?nat=${region}&results=30&page=1&seed=${seed}`)
+        axios.get(`https://randomuser.me/api?inc=name,nat,login,location,phone&nat=${region}&results=30&page=1&seed=${seed}`)
             .then((res)=>{
                 setUsers(res.data.results)
                 console.log(users);
@@ -39,9 +39,6 @@ function InfiniteScrollTable({seed, err, region, setDataCsv}) {
                     <tbody className='border'>
                         {users.map((user, index) => {
 
-                            const csv = [user.login.uuid, user.name.title + " " + user.name.first + " "+user.name.last, user.location.county + " " + user.location.city + " "+ user.location.street.number +" "+ user.location.street.name, user.phone];
-                            
-                            setDataCsv((prevData)=>[...prevData, [csv]]);
                             return (
                             <tr className='odd:bg-white even:bg-slate-100 text-center' key={index}>
                                 <td>{user.login.uuid}</td>
