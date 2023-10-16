@@ -27,7 +27,7 @@ function InfiniteScrollTable({seed, err, region}) {
             .catch((e)=>{
                 console.log(e);
             })
-    },[err, seed, region])
+    },[seed, region])
     return (
       <div>
             <InfiniteScroll
@@ -36,10 +36,10 @@ function InfiniteScrollTable({seed, err, region}) {
                 hasMore={true}
                 loader={<h4>Loading...</h4>}
             >
-                <table className='border w-full'>
+                <table className='border w-screen mt-4'>
                     <tbody className='border'>
                         {users.map((user, index) => (
-                            <tr key={index}>
+                            <tr className='odd:bg-white even:bg-slate-100 text-center' key={index}>
                                 <td>{user.login.uuid}</td>
                                 <td>{user.name.title + ' '+user.name.first + " " + user.name.last}</td>
                                 <td>{user.location.country + ", " + user.location.city + ", " + user.location.street.number + " " + user.location.street.name}</td>

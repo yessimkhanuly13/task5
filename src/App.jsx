@@ -21,11 +21,11 @@ function App() {
         </div>
         <div>
           Errors:
-          <input type="range" min='0' max='10'/>
+          <input onChange={(e)=>{setErr(e.target.value)}} type="range" min='0' max='10'/>
         </div>
         <div>
           Seed:
-          <input type="number"/>
+          <input onChange={(e)=>{setSeed(e.target.value)}} type="number"/>
           <button>Random</button>
         </div>
         <div>
