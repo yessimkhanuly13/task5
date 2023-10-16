@@ -6,7 +6,7 @@ import shuffle from './assets/shuffle.png'
 function App() {
 
   const [seed, setSeed] = useState(1);
-  const [err, setErr] = useState(1);
+  const [err, setErr] = useState(0);
   const [region, setRegion] = useState('');
   const [users, setUsers] = useState([]);
   const [csvData, setCsvData] = useState([]);
@@ -21,7 +21,7 @@ function App() {
 
     users.forEach((user)=>{
       const csv = [user.name.title + ' '+user.name.first + " " + user.name.last, user.location.country + ", " + user.location.city + ", " + user.location.street.number + " " + user.location.street.name, user.phone];
-      setCsvData((prev)=>[...prev, [csv]]);
+      setCsvData((prev)=>[...prev, csv]);
     })
 
 
@@ -39,8 +39,8 @@ function App() {
           </select>
         </div>
         <div>
-          <label htmlFor="inputfield"></label>
-          <input className="p-2" id="inputfield" onChange={(e)=>{setErr(e.target.value)}} type="range" min='0' max='10'/>
+          <input id="inputfield" value={err} onChange={(e)=>{setErr(e.target.value)}} className="text-slate-950" type="range" min='0' max='10'/>
+          <input className="w-20 ml-2" type="number" value={err} onChange={(e)=>setErr(e.target.value)}/>
         </div>
         <div className="inline-flex items-center">
           <label htmlFor="seed">Seed</label>
