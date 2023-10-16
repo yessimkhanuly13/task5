@@ -5,7 +5,7 @@ import shuffle from './assets/shuffle.png'
 
 function App() {
 
-  const [seed, setSeed] = useState(1);
+  const [seed, setSeed] = useState(0);
   const [err, setErr] = useState(0);
   const [region, setRegion] = useState('');
   const [users, setUsers] = useState([]);
@@ -13,12 +13,11 @@ function App() {
 
   const getRandomNumber = () =>{
     const number = Math.floor(Math.random() *  10000000);
+    setErr(0);
     setSeed(number);
   }
 
   const getCSV = () =>{
-    const csv = [];
-
     users.forEach((user)=>{
       const csv = [user.name.title + ' '+user.name.first + " " + user.name.last, user.location.country + ", " + user.location.city + ", " + user.location.street.number + " " + user.location.street.name, user.phone];
       setCsvData((prev)=>[...prev, csv]);
@@ -44,7 +43,7 @@ function App() {
         </div>
         <div className="inline-flex items-center">
           <label htmlFor="seed">Seed</label>
-          <input className="text-center w-20 ml-2" id="seed" onChange={(e)=>{setSeed(e.target.value)}} type="number" value={seed}/>
+          <input className="text-center w-20 ml-2" id="seed" onChange={(e)=>{setSeed(e.target.value); setErr(0)}} type="number" value={seed}/>
           <button onClick={getRandomNumber} className="w-8 h-8"><img className="" src={shuffle} alt="shuffle" /></button>
         </div>
         <div className="mt-2">
