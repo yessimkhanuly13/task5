@@ -8,26 +8,15 @@ function App() {
   const [err, setErr] = useState(0);
   const [region, setRegion] = useState('');
 
-
-  useEffect(()=>{
-    axios.get('https://randomuser.me/api/')
-      .then((res)=>{
-        console.log(res.data);
-      })
-      .catch((e)=>{
-        console.log(e);
-      })
-  },[])
-
   return (
     <>
       <div className="flex justify-around">
         <div>
           Region:
-          <select className="text-center">
-            <option value="US">USA</option>
-            <option value="FR">France</option>
-            <option value="GB">Great Britain</option>
+          <select onChange={(e)=>{setRegion(e.target.value)}} className="text-center">
+            <option value="us">USA</option>
+            <option value="fr">France</option>
+            <option value="gb">Great Britain</option>
           </select>
         </div>
         <div>
