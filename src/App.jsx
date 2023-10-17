@@ -22,8 +22,6 @@ function App() {
       const csv = [user.name.title + ' '+user.name.first + " " + user.name.last, user.location.country + ", " + user.location.city + ", " + user.location.street.number + " " + user.location.street.name, user.phone];
       setCsvData((prev)=>[...prev, csv]);
     })
-
-
   }
 
   return (
@@ -38,7 +36,7 @@ function App() {
           </select>
         </div>
         <div>
-          <input id="inputfield" value={err} onChange={(e)=>{setErr(e.target.value)}} className="text-slate-950" type="range" min='0' step='0.1' max='100'/>
+          <input id="inputfield" value={err} onChange={(e)=>{setErr(e.target.value) * 10}} className="text-slate-950" type="range" min='0' step='0.1' max='10'/>
           <input className="w-20 ml-2" type="number" value={err} onChange={(e)=>setErr(e.target.value)}/>
         </div>
         <div className="inline-flex items-center">
