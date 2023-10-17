@@ -31,7 +31,7 @@ function App() {
       <div className="flex justify-around mt-2">
         <div>
           <label htmlFor="selectfield">Region</label>
-          <select id="selectfield" onChange={(e)=>{setRegion(e.target.value)}} className="text-center p-2">
+          <select id="selectfield" onChange={(e)=>{setRegion(e.target.value); setErr(0)}} className="text-center p-2">
             <option value="us">USA</option>
             <option value="fr">France</option>
             <option value="gb">Great Britain</option>
