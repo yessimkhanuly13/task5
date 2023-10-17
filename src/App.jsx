@@ -28,7 +28,7 @@ function App() {
     <>
       <div className="flex justify-around mt-2">
         <div>
-          <label htmlFor="selectfield">Region</label>
+          <label htmlFor="selectfield">Region:</label>
           <select id="selectfield" onChange={(e)=>{setRegion(e.target.value); setErr(0)}} className="text-center p-2">
             <option value="us">USA</option>
             <option value="fr">France</option>
@@ -36,12 +36,12 @@ function App() {
           </select>
         </div>
         <div className="inline-flex items-center">
-          <label htmlFor="inputfield">Errors</label>
+          <label htmlFor="inputfield">Errors:</label>
           <input id="inputfield" value={err} onChange={(e)=>{setErr(e.target.value) * 10}} className="ml-2 text-slate-950" type="range" min='0' step='0.1' max='10'/>
           <input className="w-20 ml-2" type="number" value={err} onChange={(e)=>setErr(e.target.value)}/>
         </div>
         <div className="inline-flex items-center">
-          <label htmlFor="seed">Seed</label>
+          <label htmlFor="seed">Seed:</label>
           <input className="text-center w-20 ml-2" id="seed" onChange={(e)=>{setSeed(e.target.value); setErr(0)}} type="number" value={seed}/>
           <button onClick={getRandomNumber} className="w-8 h-8"><img className="" src={shuffle} alt="shuffle" /></button>
         </div>
