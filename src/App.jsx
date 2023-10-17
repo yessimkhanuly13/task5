@@ -35,8 +35,9 @@ function App() {
             <option value="gb">Great Britain</option>
           </select>
         </div>
-        <div>
-          <input id="inputfield" value={err} onChange={(e)=>{setErr(e.target.value) * 10}} className="text-slate-950" type="range" min='0' step='0.1' max='10'/>
+        <div className="inline-flex items-center">
+          <label htmlFor="inputfield">Errors</label>
+          <input id="inputfield" value={err} onChange={(e)=>{setErr(e.target.value) * 10}} className="ml-2 text-slate-950" type="range" min='0' step='0.1' max='10'/>
           <input className="w-20 ml-2" type="number" value={err} onChange={(e)=>setErr(e.target.value)}/>
         </div>
         <div className="inline-flex items-center">
