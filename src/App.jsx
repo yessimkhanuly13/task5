@@ -7,7 +7,7 @@ function App() {
 
   const [seed, setSeed] = useState(0);
   const [err, setErr] = useState(0);
-  const [region, setRegion] = useState('');
+  const [region, setRegion] = useState('us');
   const [users, setUsers] = useState([]);
   const [csvData, setCsvData] = useState([]);
 
