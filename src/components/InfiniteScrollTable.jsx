@@ -137,6 +137,7 @@ function InfiniteScrollTable({seed, err, region, users, setUsers}) {
                         {users.map((user, index) => {
                             return (
                             <tr className='odd:bg-white even:bg-slate-100 text-center' key={index}>
+                                <td>{index+1}</td>
                                 <td>{user.login.uuid}</td>
                                 <td>{user.name.title + ' '+user.name.first + " " + user.name.last}</td>
                                 <td>{user.location.country + ", " + user.location.city + ", " + user.location.street.number + " " + user.location.street.name}</td>
