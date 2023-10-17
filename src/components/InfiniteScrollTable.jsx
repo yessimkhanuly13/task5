@@ -9,7 +9,12 @@ function InfiniteScrollTable({seed, err, region, users, setUsers}) {
     const fetchMoreUsers = () =>{
         axios.get(`https://randomuser.me/api?inc=name,nat,login,location,phone&nat=${region}&results=10&page=${page + 1}`)
             .then((res)=>{
-                setUsers((prevUsers)=>[...prevUsers, ...res.data.results]);
+                const modifiedUsers = res.data.results.map((user) => {
+                    const modifiedUser = { ...user };
+                    introduceErrors(modifiedUser, err);
+                    return modifiedUser;
+                  });
+                setUsers((prevUsers)=>[...prevUsers, ...modifiedUsers]);
                 setPage(page+1);
             })
             .catch((e)=>{
@@ -108,12 +113,17 @@ function InfiniteScrollTable({seed, err, region, users, setUsers}) {
     useEffect(()=>{
         axios.get(`https://randomuser.me/api?inc=name,nat,login,location,phone&nat=${region}&results=30&page=1&seed=${seed}`)
             .then((res)=>{
-                setUsers(res.data.results)
+                const modifiedUsers = res.data.results.map((user) => {
+                    const modifiedUser = { ...user };
+                    introduceErrors(modifiedUser, err);
+                    return modifiedUser;
+                  });
+                  setUsers(modifiedUsers);
             })
             .catch((e)=>{
                 console.log(e);
             })
-    },[seed, region])
+    },[seed, region, err])
     return (
       <div>
             <InfiniteScroll
@@ -125,7 +135,6 @@ function InfiniteScrollTable({seed, err, region, users, setUsers}) {
                 <table className='border w-screen mt-4'>
                     <tbody className='border'>
                         {users.map((user, index) => {
-                            introduceErrors(user, err);
                             return (
                             <tr className='odd:bg-white even:bg-slate-100 text-center' key={index}>
                                 <td>{user.login.uuid}</td>
