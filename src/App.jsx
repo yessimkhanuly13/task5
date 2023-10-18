@@ -15,6 +15,7 @@ function App() {
     const number = Math.floor(Math.random() *  10000000);
     setErr(0);
     setSeed(number);
+    console.log(seed);
   }
 
   const getCSV = () =>{

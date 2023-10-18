@@ -4,10 +4,10 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 function InfiniteScrollTable({seed, err, region, users, setUsers}) {
     
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(0);
 
     const fetchMoreUsers = () =>{
-        axios.get(`https://randomuser.me/api?inc=name,nat,login,location,phone&nat=${region}&results=10&page=${page + 1}`)
+        axios.get(`https://randomuser.me/api?inc=name,nat,login,location,phone&seed=${seed}&page=${page+1}&nat=${region}&results=10`)
             .then((res)=>{
                 const modifiedUsers = res.data.results.map((user) => {
                     const modifiedUser = { ...user };
@@ -111,8 +111,9 @@ function InfiniteScrollTable({seed, err, region, users, setUsers}) {
       }
     
     useEffect(()=>{
-        axios.get(`https://randomuser.me/api?inc=name,nat,login,location,phone&nat=${region}&results=30&page=1&seed=${seed}`)
+        axios.get(`https://randomuser.me/api?inc=name,nat,login,location,phone&seed=${seed}&page=1&nat=${region}&results=30`)
             .then((res)=>{
+                setPage(1);
                 const modifiedUsers = res.data.results.map((user) => {
                     const modifiedUser = { ...user };
                     introduceErrors(modifiedUser, err);
