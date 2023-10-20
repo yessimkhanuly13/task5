@@ -23,8 +23,23 @@ function InfiniteScrollTable({seed, err, region, users, setUsers}) {
     }
 
     const introduceErrors = (user, errorCount) => {
-        errorCount = errorCount ;
-        for (let i = 0; i < errorCount; i++) {
+        let err;
+        if(errorCount < 1 && errorCount > 0 ){
+            const times = 1/errorCount;
+            const chance = [];
+            for(let len = 0; len < times-1; len++){
+                chance.push(0);
+            }
+            chance.push(1);
+
+            const probabilityValue = Math.floor(Math.random() * chance.length);
+
+            err = chance[probabilityValue];
+        }else{
+            err = errorCount;
+        }
+        
+        for (let i = 0; i < err; i++) {
             const data = ['name', 'location', 'id', 'phone'];
 
             const dataType = Math.floor(Math.random() * 4);
