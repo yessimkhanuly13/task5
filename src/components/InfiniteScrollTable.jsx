@@ -22,10 +22,8 @@ function InfiniteScrollTable({seed, err, region, users, setUsers}) {
             })
     }
 
-    const introduceErrors = (user, errorCount) => {
-        let err;
-        if(errorCount < 1 && errorCount > 0 ){
-            const times = 1/errorCount;
+    const probabilityValue = (float) =>{
+        const times = 1/float;
             const chance = [];
             for(let len = 0; len < times-1; len++){
                 chance.push(0);
@@ -34,7 +32,17 @@ function InfiniteScrollTable({seed, err, region, users, setUsers}) {
 
             const probabilityValue = Math.floor(Math.random() * chance.length);
 
-            err = chance[probabilityValue];
+            let err = chance[probabilityValue];
+            console.log(err);
+            return err;
+    }
+
+    const introduceErrors = (user, errorCount) => {
+        let err;
+        if(errorCount % 1 !== 0 ){
+            const floatNum = (errorCount % 1).toFixed(1);
+            err = errorCount - floatNum;
+            err += probabilityValue(floatNum);
         }else{
             err = errorCount;
         }
